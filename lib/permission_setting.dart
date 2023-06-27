@@ -15,14 +15,13 @@ class ContactUtils {
 
 class PhotoUtils {
   Future<PermissionStatus?> getPhotosPermission() async {
-    final PermissionStatus permission = await Permission.photos.status;
-    if (permission != PermissionStatus.granted &&
-        permission != PermissionStatus.permanentlyDenied) {
-      final Map<Permission, PermissionStatus> permissionStatus =
-      await [Permission.photos].request();
-      return permissionStatus[Permission.photos];
-    } else {
-      return permission;
+    final permission = await Permission.photos.status;
+
+    if(permission.isDenied){
+      return await Permission.photos.request();
     }
-  }
+
+   return permission;
+    }
 }
+

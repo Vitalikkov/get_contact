@@ -46,10 +46,32 @@ class _ContactItemState extends State<ContactItem> {
             ),
             CircleAvatar(
               radius: 50,
-              child: Icon(
-                size: 50,
-                Icons.person,
-                ),
+              child: Stack(
+                children: [
+                    Icon(
+                    size: 50,
+                    Icons.person,
+                  ),
+                  Positioned(
+                    bottom: 0.0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      width: double.infinity,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.photo_camera_outlined,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
             ),
             SizedBox(
               height: 20,
