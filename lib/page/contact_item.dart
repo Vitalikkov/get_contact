@@ -44,22 +44,27 @@ class _ContactItemState extends State<ContactItem> {
             SizedBox(
               height: 50,
             ),
-            CircleAvatar(
-              radius: 50,
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).primaryColor,
+                ),
               child: Stack(
                 children: [
-                    Icon(
-                    size: 50,
-                    Icons.person,
-                  ),
                   Positioned(
-                    bottom: 0.0,
+                    bottom: 5.0,
                     left: 0,
                     right: 0,
                     child: Container(
                       width: double.infinity,
                       height: 20,
                       decoration: BoxDecoration(
+                         borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50),
+                      ),
                         color: Colors.black.withOpacity(0.5),
                       ),
                       child: Center(
@@ -69,6 +74,12 @@ class _ContactItemState extends State<ContactItem> {
                       ),
                     ),
                   ),
+                  Icon(
+                    size: 50,
+                    color: Colors.white,
+                    Icons.person,
+                  ),
+                  
                 ],
               ),
 
