@@ -4,18 +4,17 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get_contact/main.dart';
-import 'package:get_contact/permission_setting.dart';
+import 'package:get_contact/image_model.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:contacts_service/contacts_service.dart';
 
 
 class ContactItem extends StatefulWidget {
   
   final String name;
   final String number;
-  final Uint8List avater;
+  final Uint8List? avatar;
 
-  const ContactItem({Key? key, required this.name, required this.number, required this.avater}): super(key: key); 
+  const ContactItem({Key? key, required this.name, required this.number, required this.avatar}): super(key: key);
 
   @override
   State<ContactItem> createState() => _ContactItemState();
@@ -33,6 +32,8 @@ class _ContactItemState extends State<ContactItem> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.name),
@@ -41,48 +42,56 @@ class _ContactItemState extends State<ContactItem> {
         width: double.infinity,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Container(
-              width: 100,
-              height: 100,
+              width: 130,
+              height: 130,
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).primaryColor,
-                ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 5.0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      width: double.infinity,
-                      height: 20,
-                      decoration: BoxDecoration(
-                         borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50),
-                      ),
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.photo_camera_outlined,
+                shape: BoxShape.circle,
+                color: Theme.of(context).primaryColor,
+                image: widget.avatar != null && widget.avatar!.isNotEmpty
+                    ? DecorationImage(
+                  image: MemoryImage(widget.avatar!),
+                  fit: BoxFit.cover,
+                )
+                    : null,
+              ),
+              child: ClipOval(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    if (widget.avatar == null || widget.avatar!.isEmpty)
+                    const Icon(
+                      size: 50,
+                      color: Colors.white,
+                      Icons.person,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        width: double.infinity,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        child: const Center(
+                          child: Icon(
+
+                            color: Colors.white,
+                            Icons.photo_camera_outlined,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Icon(
-                    size: 50,
-                    color: Colors.white,
-                    Icons.person,
-                  ),
-                  
-                ],
-              ),
 
+
+                  ],
+                ),
+              ),
             ),
             SizedBox(
               height: 20,
