@@ -21,12 +21,15 @@ class ContactList extends StatefulWidget{
 }
 
 class _ContactListState extends State<ContactList> {
+<<<<<<< HEAD
   void _updateAvatar(int index, Uint8List? newAvatar) {
     setState(() {
       widget.contacts?[index].photo = newAvatar;
       widget.contacts?[index].update();
     });
   }
+=======
+>>>>>>> origin/dev
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -43,8 +46,11 @@ class _ContactListState extends State<ContactList> {
                   '${widget.contacts?[index].name.first} ${widget.contacts?[index].name.last}',
                   number: widget.contacts?[index].phones.first.number ?? '',
                   avatar: widget.contacts?[index].photo ?? Uint8List(0),
+<<<<<<< HEAD
                   onAvatarChanged: (newAvatar) => _updateAvatar(index, newAvatar),
 
+=======
+>>>>>>> origin/dev
                 ),
               ),
             );
